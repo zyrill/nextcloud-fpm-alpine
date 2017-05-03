@@ -7,7 +7,7 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 # Install dependencies
 RUN apk update && \
 	apk upgrade && \
-	apk add autoconf bzip2 freetype-dev file gcc g++ gnupg icu-dev icu-libs libc-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev libxml2-dev make musl-dev postgresql-dev wget
+	apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev libxml2-dev make musl-dev postgresql-dev wget
 
 # Install Nextcloud
 ENV NEXTCLOUD_VERSION 11.0.3

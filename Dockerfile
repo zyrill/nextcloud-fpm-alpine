@@ -1,5 +1,5 @@
 FROM php:7.1.4-fpm-alpine
-MAINTAINER Dr. Philipp Krüger <p.a.c.krueger@gmail.com>
+MAINTAINER Dr. Philipp KrÃ¼ger <p.a.c.krueger@gmail.com>
 
 # Set UID and GID
 RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data
@@ -13,7 +13,7 @@ RUN apk update && \
 ENV NEXTCLOUD_VERSION 11.0.3
 RUN mkdir -p /var/www/html && \
 	cd /var/www/html && \
-	wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - && \
+	wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 && \
     chown -R www-data. .
 
 # Configure PHP

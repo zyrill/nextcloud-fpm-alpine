@@ -51,3 +51,4 @@ RUN apk del autoconf bzip2 file gcc g++ imagemagick libc-dev libxml2-dev make mu
 
 # Configure volumes
 VOLUME /var/www/html/
+

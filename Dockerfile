@@ -31,10 +31,12 @@ RUN { \
 RUN { \
 		echo 'opcache.memory_consumption=128'; \
 		echo 'opcache.interned_strings_buffer=8'; \
-		echo 'opcache.max_accelerated_files=4000'; \
-		echo 'opcache.revalidate_freq=60'; \
+		echo 'opcache.max_accelerated_files=10000'; \
+		echo 'opcache.revalidate_freq=1'; \
+		echo 'opcache.save_comments=1'; \
 		echo 'opcache.fast_shutdown=1'; \
 		echo 'opcache.enable_cli=1'; \
+		echo 'opcache.enable=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 RUN mkdir -p /tmp/pear/download/ && \

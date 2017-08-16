@@ -10,7 +10,7 @@ RUN apk update && \
 	apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev libmcrypt-dev pcre-dev libpng-dev libxml2-dev make musl-dev postgresql-dev wget
 
 # Install Nextcloud
-ENV NEXTCLOUD_VERSION 12.0.1
+ENV NEXTCLOUD_VERSION 12.0.2
 RUN mkdir -p /var/www/html && \
 	cd /var/www/html && \
 	wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 && \

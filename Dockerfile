@@ -38,8 +38,8 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 	&& pear install redis.tgz \
 	&& docker-php-ext-enable apcu redis \
 	&& rm -rf /tmp/pear/ \
-	&& apk del autoconf bzip2 file gcc g++ icu-dev libc-dev libxml2-dev make musl-dev wget \
-	# icu-libs libmcrypt-dev pcre-dev postgresql-dev \
+	&& apk del autoconf bzip2 file gcc g++ icu-dev libc-dev libmcrypt-dev libxml2-dev make musl-dev pcre-dev postgresql-dev wget \
+	# icu-libs \
 	&& rm -rf /var/cache/apk/*
 
 # Configure volumes

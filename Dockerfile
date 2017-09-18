@@ -39,7 +39,8 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 	&& docker-php-ext-enable apcu redis \
 	&& rm -rf /tmp/pear/ \
 	&& apk del autoconf bzip2 file gcc g++ libc-dev make musl-dev wget \
-	&& rm -rf /var/cache/apk/*
+	&& rm -rf /var/cache/apk/* \
+	&& echo '*/15    *       *       *       *       php -f /var/www/html/cron.php' > /etc/crontabs/www-data
 
 # Configure volumes
 VOLUME /var/www/html/

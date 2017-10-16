@@ -1,0 +1,46 @@
+version: "2"
+services:
+  nginx:
+    image: zyrill/nginx:latest
+    restart: always
+    ports:
+      - "443:443/tcp"
+    links:
+      - nextcloud
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/ncfpm.conf:/etc/nginx/conf.d/ncfpm.conf:ro
+      - ./config/nginx.crt:/etc/nginx/nginx.crt:ro
+      - ./config/nginx.key:/etc/nginx/nginx.key:ro
+    volumes_from:
+      - nextcloud
+    depends_on:
+      - nextcloud
+  nextcloud:
+    image: zyrill/nextcloud:latest
+    restart: always
+    expose:
+      - "9000"
+    links:
+      - redis
+      - mariadb
+    volumes:
+      - ./data/apps:/var/www/html/apps
+      - ./config/config.php:/var/www/html/config/config.php
+      - ./data/data:/var/www/html/data
+    depends_on:
+      - redis
+      - mariadb
+  redis:
+    image: redis:alpine
+    restart: always
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=nBjWdDUCHgJgn6WSuGk2ef3s
+      - MYSQL_DATABASE=next
+      - MYSQL_USER=next
+      - MYSQL_PASSWORD=avXa8tnDKtqzVQzH6qmySZD9
+    volumes:
+      - ./DB:/var/lib/mysql

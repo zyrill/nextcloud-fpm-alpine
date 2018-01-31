@@ -1,6 +1,6 @@
-FROM php:7.2.1-fpm-alpine3.7
+FROM php:7.1.13-fpm-alpine
 
-LABEL maintainer="Dr. Philipp Krüger <p.a.c.krueger@gmail.com>"
+LABEL maintainer="Dr. Philipp Kleine Jäger <philipp.kleinejaeger@gmail.com>"
 
 ENV NEXTCLOUD_VERSION 12.0.5
 

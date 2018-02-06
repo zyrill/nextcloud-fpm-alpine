@@ -6,13 +6,13 @@ ENV NEXTCLOUD_VERSION 13.0.0
 
 # Set UID and GID
 RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data \
-	&& apk update && apk upgrade && apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev libmcrypt-dev pcre-dev libpng-dev libxml2-dev make musl-dev postgresql-dev wget \
+	&& apk update && apk upgrade && apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev pcre-dev libpng-dev libxml2-dev make musl-dev postgresql-dev wget \
 	&& mkdir -p /var/www/html \
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
     && chown -R www-data. . \
 	&& docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
-	&& docker-php-ext-install gd exif intl mbstring mcrypt mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
+	&& docker-php-ext-install gd exif intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
 	&& { \
 		echo 'always_populate_raw_post_data=-1'; \
 		echo 'max_execution_time=240'; \

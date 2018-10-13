@@ -1,7 +1,7 @@
 # nextcloud-fpm-alpine
-Latest Nextcloud based on php:7.2.9-fpm-alpine3.8 with opcode caching enabled for performance.
+Latest Nextcloud based on a recent php:fpm-alpine with opcode caching enabled for performance.
 
-Nextcloud version: 13.0.6
+Nextcloud version: 14.0.3
 
 For security reasons, consider disabling or even better: redirecting port 80 with a HTTP 302 redirection to 443 and enable TLS (SSL). Use the nginx config file for this.
 

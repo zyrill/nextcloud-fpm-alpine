@@ -19,6 +19,7 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 		echo 'max_input_vars=1500'; \
 		echo 'upload_max_filesize=32M'; \
 		echo 'post_max_size=32M'; \
+		echo 'memory_limit=512M'; \
 	} > /usr/local/etc/php/conf.d/nextcloud.ini \
 	&& { \
 		echo 'opcache.memory_consumption=128'; \

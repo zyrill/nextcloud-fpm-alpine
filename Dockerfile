@@ -6,7 +6,7 @@ ENV NEXTCLOUD_VERSION 16.0.0
 
 # Set UID and GID
 RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data \
-	&& apk update && apk upgrade && apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev pcre-dev libpng-dev libxml2-dev make musl-dev postgresql-dev wget \
+	&& apk update && apk upgrade && apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev make musl-dev pcre-dev postgresql-dev wget \
 	&& mkdir -p /var/www/html \
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \

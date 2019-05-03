@@ -6,7 +6,7 @@ ENV NEXTCLOUD_VERSION 16.0.0
 
 # Set UID and GID
 RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data \
-	&& apk update && apk upgrade && apk add autoconf bzip2 freetype-dev file gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev make musl-dev pcre-dev postgresql-dev wget \
+	&& apk add --no-cache --virtual .build-deps autoconf bzip2 file freetype-dev gcc g++ icu-dev icu-libs libc-dev libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev make musl-dev pcre-dev postgresql-dev wget \
 	&& mkdir -p /var/www/html \
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
@@ -39,8 +39,7 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 	&& pear install redis.tgz \
 	&& docker-php-ext-enable apcu redis \
 	&& rm -rf /tmp/pear/ \
-	&& apk del autoconf bzip2 file gcc g++ libc-dev make musl-dev wget \
-	&& rm -rf /var/cache/apk/* \
+	&& apk del --no-cache .build-deps \
 	&& echo '*/15    *       *       *       *       php -f /var/www/html/cron.php' > /etc/crontabs/www-data
 
 # Configure volumes

@@ -12,7 +12,7 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
 	&& chown -R www-data. . \
-	&& docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
 	&& docker-php-ext-install gd exif intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
 	&& { \
 		echo 'always_populate_raw_post_data=-1'; \

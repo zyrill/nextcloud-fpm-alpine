@@ -7,13 +7,13 @@ ENV NEXTCLOUD_VERSION 16.0.7
 # Set UID and GID
 RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data \
 	&& apk add --no-cache --virtual .build-deps autoconf bzip2 file gcc g++ libc-dev make musl-dev pcre-dev wget \
-	&& apk add --no-cache freetype-dev icu-dev icu-libs libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev postgresql-dev \
-	&& mkdir -p /var/www/html \
+      	&& apk add --no-cache freetype-dev icu-dev icu-libs libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev oniguruma-dev postgresql-dev \
+        && mkdir -p /var/www/html \
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
 	&& chown -R www-data. . \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
-	&& docker-php-ext-install gd exif intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
+	&& docker-php-ext-install gd exif intl mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
 	&& { \
 		echo 'always_populate_raw_post_data=-1'; \
 		echo 'max_execution_time=240'; \

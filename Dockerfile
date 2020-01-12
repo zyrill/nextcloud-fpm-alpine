@@ -1,8 +1,8 @@
-FROM php:7.3.6-fpm-alpine3.9
+FROM php:7.4.1-fpm-alpine3.11
 
 LABEL maintainer="Dr. Philipp Kleine Jäger <philipp.kleinejaeger@gmail.com>"
 
-ENV NEXTCLOUD_VERSION 16.0.2
+ENV NEXTCLOUD_VERSION 16.0.7
 
 # Set UID and GID
 RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data \

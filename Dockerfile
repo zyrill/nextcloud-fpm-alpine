@@ -14,7 +14,7 @@ RUN deluser www-data && addgroup -S -g 666 www-data && adduser -S -u 666 -D -H -
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
 	&& chown -R www-data. . \
  	&& docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
- 	&& docker-php-ext-install bcmath exif gd gmp imagick intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
+ 	&& docker-php-ext-install bcmath exif gd gmp intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
 	&& { \
 		echo 'always_populate_raw_post_data=-1'; \
 		echo 'max_execution_time=240'; \

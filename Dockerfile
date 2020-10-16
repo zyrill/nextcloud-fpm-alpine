@@ -5,10 +5,11 @@ LABEL maintainer="Dr. Philipp Kleine Jäger <philipp.kleinejaeger@gmail.com>"
 ENV NEXTCLOUD_VERSION 19.0.4
 
 # Set UID and GID
-RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/false -G www-data www-data \
+RUN deluser www-data && addgroup -S -g 666 www-data && adduser -S -u 666 -D -H -s /bin/false -G www-data www-data \
 	&& apk add --no-cache --virtual .build-deps autoconf bzip2 file gcc g++ libc-dev make musl-dev pcre-dev wget \
-      	&& apk add --no-cache freetype-dev icu-dev icu-libs libjpeg-turbo-dev libmagickwand-dev libpng-dev libxml2-dev libzip-dev postgresql-dev \
-        && mkdir -p /var/www/html \
+      	&& apk add --no-cache freetype-dev icu-dev icu-libs libjpeg-turbo-dev imagemagick-dev libpng-dev libxml2-dev libzip-dev postgresql-dev \
+        && echo '' | pecl install imagick \
+	&& mkdir -p /var/www/html \
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
 	&& chown -R www-data. . \

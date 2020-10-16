@@ -7,7 +7,7 @@ ENV NEXTCLOUD_VERSION 19.0.4
 # Set UID and GID
 RUN deluser www-data && addgroup -S -g 666 www-data && adduser -S -u 666 -D -H -s /bin/false -G www-data www-data \
 	&& apk add --no-cache --virtual .build-deps autoconf bzip2 file gcc g++ libc-dev make musl-dev pcre-dev wget \
-      	&& apk add --no-cache freetype-dev gmp-dev icu-dev icu-libs libjpeg-turbo-dev imagemagick-dev libpng-dev libxml2-dev libzip-dev oniguruma postgresql-dev \
+      	&& apk add --no-cache freetype-dev gmp-dev icu-dev icu-libs libjpeg-turbo-dev imagemagick-dev libpng-dev libxml2-dev libzip-dev oniguruma-dev postgresql-dev \
         && echo '' | pecl install imagick && docker-php-ext-enable imagick \
 	&& mkdir -p /var/www/html \
 	&& cd /var/www/html \

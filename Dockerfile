@@ -12,7 +12,6 @@ RUN deluser www-data && addgroup -g 666 www-data && adduser -u 666 -D -s /bin/fa
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
 	&& chown -R www-data. . \
-	&& pecl install imagick \
  	&& docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
  	&& docker-php-ext-install bcmath exif gd gmp imagick intl mbstring mysqli opcache pdo_mysql pdo_pgsql pgsql zip \
 	&& { \

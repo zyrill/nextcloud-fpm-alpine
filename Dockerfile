@@ -6,9 +6,17 @@ ENV NEXTCLOUD_VERSION 20.0.5
 
 # Set UID and GID
 RUN deluser www-data && addgroup -S -g 666 www-data && adduser -S -u 666 -D -H -s /bin/false -G www-data www-data \
-	&& apk add --no-cache --virtual .build-deps autoconf bzip2 file gcc g++ libc-dev make musl-dev pcre-dev wget \
-      	&& apk add --no-cache freetype-dev gmp-dev icu-dev icu-libs libjpeg-turbo-dev imagemagick-dev libpng-dev libxml2-dev libzip-dev oniguruma-dev postgresql-dev \
-        && echo '' | pecl install imagick && docker-php-ext-enable imagick \
+	&& apk add --no-cache --virtual .build-deps autoconf bzip2 file gcc g++ git libc-dev make musl-dev pcre-dev wget \
+      	&& apk add --no-cache freetype-dev gmp-dev icu-dev icu-libs libjpeg-turbo-dev imagemagick-dev libpng-dev libxml2-dev libzip-dev oniguruma-dev postgresql-dev
+RUN IMAGICK_COMMIT="132a11fd26675db9eb9f0e9a3e2887c161875206" \
+	&& echo "**** install imagick php extension from source ****" \
+	&& git clone https://github.com/Imagick/imagick \
+	&& cd imagick \
+	&& git checkout ${IMAGICK_COMMIT} \
+	&& phpize \
+	&& ./configure && make && make install && cd .. && rm -rf imagick \
+	&& docker-php-ext-enable imagick \
+	# && echo '' | pecl install imagick && docker-php-ext-enable imagick \
 	&& mkdir -p /var/www/html \
 	&& cd /var/www/html \
 	&& wget -O - https://download.nextcloud.com/server/releases/nextcloud-${NEXTCLOUD_VERSION}.tar.bz2 | tar -xjf - --strip 1 \
